@@ -48,8 +48,8 @@ contract ForwardStaking is Initializable, Ownable {
     }
 
     function stake(uint amount) public {
-        require(amount >= 1e18, "Must stake at least one FWC.");
-        require(forwardToken.balanceOf(msg.sender) >= amount, "Cannot stake more FWC than you hold unstaked.");
+        require(amount >= 1e18, "Must stake at least one FWD.");
+        require(forwardToken.balanceOf(msg.sender) >= amount, "Cannot stake more FWD than you hold unstaked.");
         uint tax = findTaxAmount(amount);
         uint stakeAmount = amount.sub(tax);
         totalStakers = totalStakers.add(1);
@@ -66,8 +66,8 @@ contract ForwardStaking is Initializable, Ownable {
     }
 
     function unstake(uint amount) public {
-        require(amount >= 1e18, "Must unstake at least one FWC.");
-        require(stakeValue[msg.sender] >= amount, "Cannot unstake more FWC than you have staked.");
+        require(amount >= 1e18, "Must unstake at least one FWD.");
+        require(stakeValue[msg.sender] >= amount, "Cannot unstake more FWD than you have staked.");
         uint tax = findTaxAmount(amount);
         uint earnings = amount.sub(tax);
         if (stakeValue[msg.sender] == amount) totalStakers = totalStakers.sub(1);
